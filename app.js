@@ -9,7 +9,7 @@ const routes = require("./routes");//路由表
 const logger = require("koa-logger");//日志
 const onerror = require("koa-onerror");
 const bodyparser = require("koa-bodyparser");//http body
-const  {secret,unless} = require(__base + '/config/jsonWebToken');//jsonWebToken 配置文件
+const  {secret,unless} = require(__base + '/config/jwtKoa');//jsonWebToken 配置文件
 
 
 // error handler

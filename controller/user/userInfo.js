@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const util = require("util");
 const verify = util.promisify(jwt.verify);
-const { secret } = require(__base + "/config/jsonWebToken");
+const { secret } = require(__base + "/config/jwtKoa");
 /**
  * token 内容解密
  */

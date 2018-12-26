@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { secret, tokenValidityPeriod } = require(__base +
-  "/config/jsonWebToken");
+  "/config/jwtKoa");
 /**
  * 用户登陆
  */
