@@ -7,7 +7,9 @@ module.exports = async (ctx, next) => {
   const user = ctx.request.body;
   if (user && user.name) {
     let userToken = {
-      name: user.name
+      name: user.name,
+      nickName:'test',
+      Gender:'male',
     };
     const token = jwt.sign(userToken, secret, {
       expiresIn: tokenValidityPeriod
