@@ -20,9 +20,10 @@ module.exports = async (ctx, next) => {
       token
     };
   } else {
+    ctx.status = 400;
     ctx.body = {
+      type:'error',
       message: "参数错误",
-      code: -1
     };
   }
 };

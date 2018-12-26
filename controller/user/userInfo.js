@@ -14,9 +14,10 @@ module.exports = async ctx => {
       payload
     };
   } else {
+    ctx.status = 400;
     ctx.body = {
-      message: "token 错误",
-      code: -1
+      type:'error',
+      message: "token 错误"
     };
   }
 };
