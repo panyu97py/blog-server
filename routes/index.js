@@ -10,4 +10,8 @@ router.all("/", async ctx => {
   await ctx.render("index");
 });
 
+// 添加测试模块
+const test = require("./test");
+router.use("/test", test.routes(), test.allowedMethods());
+
 module.exports = router;

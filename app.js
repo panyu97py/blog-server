@@ -1,6 +1,7 @@
 global.__base = __dirname + '/';
 const Koa = require("koa");
 const app = new Koa();
+const cors = require('koa2-cors');//跨域
 const json = require("koa-json");
 const jwtKoa = require("koa-jwt");//jsonWebToken 中间件
 const views = require("koa-views");
@@ -21,6 +22,7 @@ app.use(
   })
 );
 app.use(json());
+app.use(cors());
 app.use(logger());
 app.use(require("koa-static")(__dirname + "/public"));
 

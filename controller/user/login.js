@@ -1,15 +1,15 @@
 const jwt = require("jsonwebtoken");
-const  {secret,tokenValidityPeriod} = require(__base+'/config/jsonWebToken')
+const { secret, tokenValidityPeriod } = require(__base +
+  "/config/jsonWebToken");
 /**
  * 用户登陆
  */
 module.exports = async (ctx, next) => {
-  const user = ctx.request.body;
-  if (user && user.name) {
+  const body = ctx.request.body;
+  if (body && permissionCheck(body)) {
     let userToken = {
-      name: user.name,
-      nickName:'test',
-      Gender:'male',
+      name: body.username,
+      nickName: "test",
     };
     const token = jwt.sign(userToken, secret, {
       expiresIn: tokenValidityPeriod
@@ -22,8 +22,15 @@ module.exports = async (ctx, next) => {
   } else {
     ctx.status = 400;
     ctx.body = {
-      type:'error',
-      message: "参数错误",
+      type: "error",
+      message: "参数错误"
     };
+  }
+};
+const permissionCheck = ({username, password}) => {
+  if (username === '123' && password === '123') {
+    return true;
+  }else {
+    return false
   }
 };
