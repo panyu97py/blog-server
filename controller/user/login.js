@@ -21,7 +21,7 @@ module.exports = async (ctx, next) => {
       const token = jwt.sign(user_info, secret, {
         expiresIn: tokenValidityPeriod
       });
-      ctx.body = { token, user_info };
+      ctx.body = { token };
     } else {
       ctx.body = { type: "fail", message: "账户或密码错误" };
     }
