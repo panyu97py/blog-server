@@ -8,6 +8,7 @@ const user =require(__base+'/controller/user');
 router.post("/login", user.login);
 router.post("/register",user.register);
 router.get("/userInfo", user.userInfo);
+router.get("/check_username", user.check_username);
 
 
 module.exports = router;
