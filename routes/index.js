@@ -10,6 +10,10 @@ router.all("/", async ctx => {
   await ctx.render("index");
 });
 
+//添加验证码模块
+const captcha =require('./captcha')
+router.use('/captcha',captcha.routes(),captcha.allowedMethods());
+
 // 添加测试模块
 const test = require("./test");
 router.use("/test", test.routes(), test.allowedMethods());

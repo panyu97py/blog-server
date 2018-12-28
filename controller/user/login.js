@@ -6,7 +6,7 @@ const query = require(__base + "/config/mysql");
  */
 module.exports = async (ctx, next) => {
   const body = ctx.request.body;
-  let { username, password } = body;
+  const { username, password } = body;
   if (username && password) {
     let sql = `SELECT user_id,user_name,user_nickname FROM bolg_user WHERE user_name=? AND user_password=?`; //sql语句
     let params = [username, password]; //参数
@@ -27,6 +27,7 @@ module.exports = async (ctx, next) => {
     }
   } else {
     ctx.status = 400;
-    ctx.body = { type: "error", message: "参数错误" };
+    let message =username?'密码不能为空':'用户名不能为空'
+    ctx.body = { type: "error",message };
   }
 };

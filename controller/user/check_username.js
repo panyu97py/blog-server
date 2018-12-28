@@ -4,7 +4,7 @@ const query = require(__base + "/config/mysql");
  */
 module.exports = async (ctx, next) => {
   const body = ctx.request.body;
-  let { username } = body;
+  const { username } = body;
   if (username) {
     let sql = `SELECT * FROM bolg_user WHERE user_name=?`;
     let params = [username];
