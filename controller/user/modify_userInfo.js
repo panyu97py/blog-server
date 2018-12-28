@@ -11,8 +11,14 @@ module.exports = async (ctx, next) => {
   if (user_id) {
     let updateSql = `UPDATE bolg_user SET user_nickname = ?,user_email=? WHERE user_id=?`;
     let params = [user_nickname, user_email, user_id];
-    await query(updateSql, params);
-    ctx.body = { type: "success", message: "修改成功" };
+    let update_query_results = await query(updateSql, params);
+    let status = update_query_results.affectedRows === 1;
+    ctx.body = status
+      ? { type: "success", message: "修改成功" }
+      : {
+          type: "fail",
+          message: "修改失败，如有疑问请联系管理员"
+        };
   } else {
     ctx.status = 400;
     ctx.body = { type: "error", message: "用户id不能为空" };
