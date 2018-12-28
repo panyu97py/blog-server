@@ -11,6 +11,9 @@ module.exports = async (ctx, next) => {
     let sql = `SELECT * FROM blog_captcha WHERE captcha_id=? AND captcha_text=?`; //sql语句
     let params = [captcha_id, captcha_text];
     let query_results = await query(sql, params);
+    let deleteSql =` DELETE FROM blog_captcha WHERE captcha_id = ?`
+    let deleteParam = [captcha_id]
+    await query(deleteSql, deleteParam);
     let status = query_results.length;
     let type = status ? "success" : "fail";
     let message = status ? "验证码校验成功" : "验证码校验失败";
