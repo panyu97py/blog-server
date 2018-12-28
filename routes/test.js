@@ -4,7 +4,7 @@
 const router = require("koa-router")();
 const test =require(__base+'/controller/test');
 
-//登陆
+//添加文章
 router.post("/article", test.article);
 
 

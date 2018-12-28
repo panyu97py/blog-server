@@ -2,21 +2,24 @@ const jwt = require("jsonwebtoken");
 const { secret, tokenValidityPeriod } = require(__base + "/config/jwtKoa");
 const query = require(__base + "/config/mysql");
 /**
- * 用户登陆
+ * 用户登陆（无需携带token）
+ * @param user_name 用户名
+ * @param user_password 密码
  */
 module.exports = async (ctx, next) => {
   const body = ctx.request.body;
-  const { username, password } = body;
-  if (username && password) {
-    let sql = `SELECT user_id,user_name,user_nickname FROM bolg_user WHERE user_name=? AND user_password=?`; //sql语句
-    let params = [username, password]; //参数
+  const { user_name, user_password } = body;
+  if (user_name && user_password) {
+    let sql = `SELECT user_id,user_name,user_nickname,user_email FROM bolg_user WHERE user_name=? AND user_password=?`; //sql语句
+    let params = [user_name, user_password]; //参数
     let query_results = await query(sql, params);
     if (query_results.length === 1) {
-      let { user_id, user_name, user_nickname } = query_results[0];
+      let { user_id, user_name, user_nickname,user_email } = query_results[0];
       let user_info = {
         user_id,
         user_name,
-        user_nickname
+        user_nickname,
+        user_email
       };
       const token = jwt.sign(user_info, secret, {
         expiresIn: tokenValidityPeriod
@@ -27,7 +30,7 @@ module.exports = async (ctx, next) => {
     }
   } else {
     ctx.status = 400;
-    let message =username?'密码不能为空':'用户名不能为空'
+    let message =user_name?'密码不能为空':'用户名不能为空'
     ctx.body = { type: "error",message };
   }
 };
