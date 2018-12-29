@@ -1,7 +1,7 @@
-const saveLog = require("./saveLog");
+const normalLog = require("./normalLog");
 const errorLog = require("./errorLog");
 
 module.exports = {
-  saveLog,
+  normalLog,
   errorLog
 };

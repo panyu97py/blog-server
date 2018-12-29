@@ -36,7 +36,7 @@ app.use(
 );
 
 // logger
-app.use(log.saveLog);
+app.use(log.normalLog);
 
 // error-handling
 app.on("error", log.errorLog);
