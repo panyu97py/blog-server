@@ -10,12 +10,24 @@ router.all("/", async ctx => {
   await ctx.render("index");
 });
 
-//添加验证码模块
+//验证码模块
 const captcha =require('./captcha')
 router.use('/captcha',captcha.routes(),captcha.allowedMethods());
 
-// 添加测试模块
+//测试模块
 const test = require("./test");
 router.use("/test", test.routes(), test.allowedMethods());
+
+//标签模块
+const label = require("./label");
+router.use("/label",label.routes(),label.allowedMethods())
+
+//分类模块
+const sort = require("./sort");
+router.use("/sort",sort.routes(),sort.allowedMethods())
+
+//博文模块
+const article = require("./article");
+router.use("/article",article.routes(),article.allowedMethods())
 
 module.exports = router;
