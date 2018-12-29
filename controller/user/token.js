@@ -26,13 +26,13 @@ module.exports = async (ctx, next) => {
       const token = jwt.sign(user_info, secret, {
         expiresIn: tokenValidityPeriod
       });
-      ctx.body = { type:'success',message:'用户名、密码校验成功', token };
+      ctx.body = { status:'success',message:'用户名、密码校验成功', token };
     } else {
-      ctx.body = { type: "fail", message: "账户或密码错误" };
+      ctx.body = { status: "fail", message: "账户或密码错误" };
     }
   } else {
     ctx.status = 400;
     let message =user_name?'密码不能为空':'用户名不能为空'
-    ctx.body = { type: "error",message };
+    ctx.body = { status: "error",message };
   }
 };

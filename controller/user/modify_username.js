@@ -14,10 +14,9 @@ module.exports = async (ctx, next) => {
     let updateSql = `UPDATE bolg_user SET user_name = ? WHERE user_id=? AND user_password=?`;
     let params = [new_user_name, user_id, encryption(user_password)];
     let data = await query(updateSql, params);
-    let status = data.affectedRows === 1;
     ctx.body = {
-      type: status ? "success" : "fail",
-      message: status ? "修改成功" : "密码错误",
+      status:  data.affectedRows === 1? "success" : "fail",
+      message:  data.affectedRows === 1 ? "修改成功" : "密码错误",
     };
   } else {
     ctx.status = 400;
@@ -26,6 +25,6 @@ module.exports = async (ctx, next) => {
         ? "新用户名不能为空"
         : "用户密码不能为空"
       : "用户id不能为空";
-    ctx.body = { type: "error", message };
+    ctx.body = { status: "error", message };
   }
 };

@@ -14,13 +14,13 @@ module.exports = async (ctx, next) => {
     let update_query_results = await query(updateSql, params);
     let status = update_query_results.affectedRows === 1;
     ctx.body = status
-      ? { type: "success", message: "修改成功" }
+      ? { status: "success", message: "修改成功" }
       : {
-          type: "fail",
+        status: "fail",
           message: "修改失败，如有疑问请联系管理员"
         };
   } else {
     ctx.status = 400;
-    ctx.body = { type: "error", message: "用户id不能为空" };
+    ctx.body = { status: "error", message: "用户id不能为空" };
   }
 };

@@ -27,9 +27,9 @@ module.exports = async (ctx, next) => {
         encryption(original_user_password)
       ];
       await query(updateSql, updateParams);
-      ctx.body = { type: "success", message: "修改密码成功" };
+      ctx.body = { status: "success", message: "修改密码成功" };
     } else {
-      ctx.body = { type: "fail", message: "原密码核对失败" };
+      ctx.body = { status: "fail", message: "原密码核对失败" };
     }
   } else {
     ctx.status = 400;
@@ -40,6 +40,6 @@ module.exports = async (ctx, next) => {
           : "新密码不能为空"
         : "原密码不能为空"
       : "用户名不能为空";
-    ctx.body = { type: "error", message };
+    ctx.body = { status: "error", message };
   }
 };

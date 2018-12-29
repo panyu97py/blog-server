@@ -14,13 +14,12 @@ module.exports = async (ctx, next) => {
     let deleteSql =` DELETE FROM blog_captcha WHERE captcha_id = ?`
     let deleteParam = [captcha_id]
     await query(deleteSql, deleteParam);
-    let status = query_results.length;
-    let type = status ? "success" : "fail";
-    let message = status ? "验证码校验成功" : "验证码校验失败";
-    ctx.body = { type, message };
+    let status =  query_results.length ? "success" : "fail";
+    let message =  query_results.length ? "验证码校验成功" : "验证码校验失败";
+    ctx.body = { status, message };
   } else {
     ctx.status = 400;
     let message = captcha_id ? "验证码不能为空" : "验证码id不能为空";
-    ctx.body = { type: "error", message };
+    ctx.body = { status: "error", message };
   }
 };

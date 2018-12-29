@@ -3,7 +3,7 @@ module.exports = (ctx, next) => {
     if (err.status === 401 ||err.status === '401') {
       ctx.status = 401;
       ctx.body = {
-        type: "error",
+        status: "error",
         message: "无效的Token"
       };
     } else {

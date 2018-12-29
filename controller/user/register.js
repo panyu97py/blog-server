@@ -13,10 +13,10 @@ module.exports = async (ctx, next) => {
     let sql = `INSERT INTO bolg_user (user_id,user_name, user_password,user_nickname) VALUES (REPLACE(UUID(),"-",""),?,?,?)`; //sql语句
     let params = [user_name, encryption(user_password), user_nickname];
     await query(sql, params);
-    ctx.body = { type: "success", message: "注册成功" };
+    ctx.body = { status: "success", message: "注册成功" };
   } else {
     ctx.status = 400;
     let message = user_name ? "密码不能为空" : "用户名不能为空";
-    ctx.body = { type: "error", message };
+    ctx.body = { status: "error", message };
   }
 };

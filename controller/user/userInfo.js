@@ -15,7 +15,7 @@ module.exports = async ctx => {
   } else {
     ctx.status = 400;
     ctx.body = {
-      type: "error",
+      status: "error",
       message: "token 错误"
     };
   }
