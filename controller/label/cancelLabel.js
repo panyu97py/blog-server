@@ -1,14 +1,13 @@
 const query = require(__base + "/config/mysql");
 /**
- * 为博文新增标签
+ * 取消博文标签
  */
 module.exports = async (ctx, next) => {
-  let body = ctx.request.body;
-  let { article_id, label_id } = body;
-  let sql = `INSERT INTO blog_set_label (article_id,label_id) VALUES (?,?)`;
+  let { article_id, label_id } = ctx.query;
+  let sql = `DELETE FROM blog_set_label WHERE article_id=? AND label_id=?`;
   let param = [article_id, label_id];
   let res = await query(sql, param);
   let status = res.affectedRows === 1 ? "success" : "fail";
-  let message = res.affectedRows === 1 ? "设置成功" : "设置失败";
+  let message = res.affectedRows === 1 ? "取消成功" : "取消失败";
   ctx.body = { status, message };
 };
