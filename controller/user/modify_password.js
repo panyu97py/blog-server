@@ -1,4 +1,5 @@
 const query = require(__base + "/config/mysql");
+const encryption = require(__base + "/untils/encryption.js");
 /**
  * 修改用户密码 (需要携带token)
  * @param user_name 用户名
@@ -15,12 +16,16 @@ module.exports = async (ctx, next) => {
     original_user_password !== new_user_password
   ) {
     let selectSql = `SELECT user_id,user_name,user_nickname FROM bolg_user WHERE user_name=? AND user_password=?`;
-    let selectParams = [user_name, original_user_password];
+    let selectParams = [user_name, encryption(original_user_password)];
     let select_query_results = await query(selectSql, selectParams);
     let status = select_query_results.length === 1;
     if (status) {
       let updateSql = `UPDATE bolg_user SET user_password = ? WHERE user_name=? AND user_password=?`;
-      let updateParams = [new_user_password, user_name, original_user_password];
+      let updateParams = [
+        encryption (new_user_password),
+        user_name,
+        encryption(original_user_password)
+      ];
       await query(updateSql, updateParams);
       ctx.body = { type: "success", message: "修改密码成功" };
     } else {

@@ -1,4 +1,5 @@
 const query = require(__base + "/config/mysql");
+const encryption =require (__base+"/untils/encryption.js")
 /**
  * 用户注册（无需携带token）
  * @param user_name 用户名
@@ -10,7 +11,7 @@ module.exports = async (ctx, next) => {
   const { user_name, user_password, user_nickname } = body;
   if (user_name && user_password) {
     let sql = `INSERT INTO bolg_user (user_id,user_name, user_password,user_nickname) VALUES (REPLACE(UUID(),"-",""),?,?,?)`; //sql语句
-    let params = [user_name, user_password, user_nickname];
+    let params = [user_name, encryption(user_password), user_nickname];
     await query(sql, params);
     ctx.body = { type: "success", message: "注册成功" };
   } else {
