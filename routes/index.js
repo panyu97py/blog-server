@@ -30,4 +30,8 @@ router.use("/sort",sort.routes(),sort.allowedMethods())
 const article = require("./article");
 router.use("/article",article.routes(),article.allowedMethods())
 
+//评论模块
+const comment = require("./comment");
+router.use("/comment",comment.routes(),comment.allowedMethods())
+
 module.exports = router;
