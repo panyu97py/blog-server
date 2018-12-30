@@ -6,7 +6,7 @@ const query = require(__base + "/config/mysql");
  * @param article_id 博文id
  */
 module.exports = async (ctx, next) => {
-  const body = ctx.requset.body;
+  const body = ctx.request.body;
   let { article_title, article_content, article_id } = body;
   if (article_title && article_content && article_id) {
     let sql = `UPDATE blog_article SET article_title=?, article_content=? WHERE article_id=?`;
