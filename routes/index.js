@@ -30,4 +30,8 @@ router.use("/article",article.routes(),article.allowedMethods())
 const comment = require("./comment");
 router.use("/comment",comment.routes(),comment.allowedMethods())
 
+// 请求转发模块
+const integration = require("./integration");
+router.use("/integration",integration.routes(),integration.allowedMethods())
+
 module.exports = router;
