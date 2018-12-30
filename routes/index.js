@@ -14,10 +14,6 @@ router.all("/", async ctx => {
 const captcha =require('./captcha')
 router.use('/captcha',captcha.routes(),captcha.allowedMethods());
 
-//测试模块
-const test = require("./test");
-router.use("/test", test.routes(), test.allowedMethods());
-
 //标签模块
 const label = require("./label");
 router.use("/label",label.routes(),label.allowedMethods())
