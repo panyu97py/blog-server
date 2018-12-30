@@ -1,5 +1,5 @@
 const query = require(__base + "/config/mysql");
-const encryption =require (__base+"/untils/encryption.js")
+const encryption = require(__base + "/untils/encryption.js");
 /**
  * 用户注册（无需携带token）
  * @param user_name 用户名

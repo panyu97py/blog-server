@@ -1,5 +1,5 @@
 const query = require(__base + "/config/mysql");
-const encryption =require (__base+"/untils/encryption.js")
+const encryption = require(__base + "/untils/encryption.js");
 
 /**
  * 修改用户名（需要携带token）
@@ -15,8 +15,8 @@ module.exports = async (ctx, next) => {
     let params = [new_user_name, user_id, encryption(user_password)];
     let data = await query(updateSql, params);
     ctx.body = {
-      status:  data.affectedRows === 1? "success" : "fail",
-      message:  data.affectedRows === 1 ? "修改成功" : "密码错误",
+      status: data.affectedRows === 1 ? "success" : "fail",
+      message: data.affectedRows === 1 ? "修改成功" : "密码错误"
     };
   } else {
     ctx.status = 400;

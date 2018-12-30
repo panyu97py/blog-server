@@ -1,6 +1,8 @@
 const query = require(__base + "/config/mysql");
 /**
- * 取消博文标签
+ * 取消博文标签（需要携带token）
+ * @param article_id 文章id
+ * @param label_id 标签id
  */
 module.exports = async (ctx, next) => {
   let { article_id, label_id } = ctx.query;

@@ -22,7 +22,7 @@ module.exports = async (ctx, next) => {
     if (status) {
       let updateSql = `UPDATE bolg_user SET user_password = ? WHERE user_name=? AND user_password=?`;
       let updateParams = [
-        encryption (new_user_password),
+        encryption(new_user_password),
         user_name,
         encryption(original_user_password)
       ];

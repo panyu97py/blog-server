@@ -1,6 +1,6 @@
 const query = require(__base + "/config/mysql");
 /**
- * 获取标签列表
+ * 获取标签列表（需要携带token）
  * @param label_id 标签id
  */
 module.exports = async (ctx, next) => {

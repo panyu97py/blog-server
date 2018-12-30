@@ -16,7 +16,7 @@ module.exports = async (ctx, next) => {
     ctx.body = status
       ? { status: "success", message: "修改成功" }
       : {
-        status: "fail",
+          status: "fail",
           message: "修改失败，如有疑问请联系管理员"
         };
   } else {
