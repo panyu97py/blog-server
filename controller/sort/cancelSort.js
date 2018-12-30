@@ -1,6 +1,6 @@
 const query = require(__base + "/config/mysql");
 /**
- * 取消博文标签（需要携带token）
+ * 取消博文分类（需要携带token）
  * @param article_id 文章id
  * @param sort_id 分类id
  */
