@@ -1,7 +1,11 @@
 // const request = require('request');
-module.exports = async (ctx ,next)=>{
-  // // ctx.response.redirect('/user/token',);
-  // // ctx.body={value:'/integration/test'}
-  // let res = http.request()
-  // request.post('user/token')
-}
+const query = require(__base + "/config/mysql");
+
+module.exports = async (ctx, next) => {
+  // let sql = `SELECT * FROM sort`
+  let sql = `SELECT * FROM blog_sort`;
+  let res = await query(sql);
+  console.log( toTree(res))
+  let data = toTree(res)
+  ctx.body = { data};
+};

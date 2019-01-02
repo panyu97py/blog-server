@@ -1,5 +1,5 @@
 /**
- * 测试模块
+ * 博文分类模块
  */
 const router = require("koa-router")();
 const sort =require(__base+'/controller/sort');

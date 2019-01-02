@@ -1,4 +1,5 @@
 const query = require(__base + "/config/mysql");
+const toTree = require(__base + "/untils/recursivePartition")
 /**
  * 获取分类
  * @param sort_id 分类id
@@ -16,6 +17,6 @@ module.exports = async (ctx, next) => {
   } else {
     let sql = `SELECT * FROM blog_sort`;
     let res = await query(sql);
-    ctx.body = { status: "success", message: "查询成功", data: res };
+    ctx.body = { status: "success", message: "查询成功", data: toTree(res) };
   }
 };

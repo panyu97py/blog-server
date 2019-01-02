@@ -1,5 +1,5 @@
 /**
- * 测试模块
+ * 博文标签模块
  */
 const router = require("koa-router")();
 const label =require(__base+'/controller/label');
