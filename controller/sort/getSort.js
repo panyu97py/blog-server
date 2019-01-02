@@ -1,5 +1,5 @@
 const query = require(__base + "/config/mysql");
-const toTree = require(__base + "/untils/recursivePartition")
+const toTree = require(__base + "/untils/toTree")
 /**
  * 获取分类
  * @param sort_id 分类id
