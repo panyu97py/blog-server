@@ -4,8 +4,8 @@ const query = require(__base + "/config/mysql");
  * @param article_id 博文id
  */
 module.exports = async (ctx, next) => {
-  const body = ctx.request.body;
-  let { article_id } = body;
+  // const body = ctx.request.body;
+  let { article_id } = ctx.query;
   if (article_id) {
     let sql = `SELECT * FROM blog_article WHERE article_id=?`;
     let param = [article_id];

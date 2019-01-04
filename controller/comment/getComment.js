@@ -3,8 +3,8 @@ const query = require(__base + "/config/mysql");
  * 获取评论
  */
 module.exports = async (ctx, next) => {
-  const body = ctx.request.body;
-  let { comment_id, user_id, article_id } = body;
+  // const body = ctx.request.body;
+  let { comment_id, user_id, article_id } = ctx.query;
   if (!comment_id && !user_id && !article_id) {
     let sql = `SELECT * FROM blog_comment`;
     let res = await query(sql);

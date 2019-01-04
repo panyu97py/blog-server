@@ -5,8 +5,8 @@ const toTree = require(__base + "/untils/toTree")
  * @param sort_id 分类id
  */
 module.exports = async (ctx, next) => {
-  const body = ctx.request.body;
-  let { sort_id } = body;
+  // const body = ctx.request.body;
+  let { sort_id } = ctx.query;
   if (sort_id) {
     let sql = `SELECT * FROM blog_sort WHERE sort_id=?`;
     let param = [sort_id];

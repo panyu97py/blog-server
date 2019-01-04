@@ -10,7 +10,7 @@ module.exports = async (ctx, next) => {
   let { article_title, user_id, article_content } = body;
   if (article_title && user_id && article_content) {
     let sql = `INSERT INTO blog_article (article_id,article_title, article_content,user_id) VALUES (REPLACE(UUID(),"-",""),?,?,?)`; //sql语句
-    let params = [article_title,user_id,article_content]
+    let params = [article_title,article_content,user_id]
     let res =await query(sql, params)
     let status = res.affectedRows?'success':'fail'
     let message =res.affectedRows?'新增博文成功':'新增博文失败'
