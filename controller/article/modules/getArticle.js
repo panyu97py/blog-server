@@ -14,8 +14,8 @@ module.exports = async (ctx, next) => {
     let status = article.length ? "success" : "fail";
     let message = article.length ? "查询成功" : "查询失败";
     article=article[0]
-    article.labels=link
-    article.labels.map(item=>{
+    article.article_labels=link
+    article.article_labels.map(item=>{
       delete item.article_id
     })
     ctx.body = { status, message, data: article };
@@ -25,10 +25,10 @@ module.exports = async (ctx, next) => {
     let article_list = await query(article_sql);
     let link_list = await query(link_sql);
     article_list.map(article => {
-      article.labels=link_list.filter(item => {
+      article.article_labels=link_list.filter(item => {
         return item.article_id === article.article_id;
       })
-      article.labels.map(item=>{
+      article.article_labels.map(item=>{
         delete item.article_id
       })
     });
