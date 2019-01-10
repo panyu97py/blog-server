@@ -4,18 +4,39 @@ const query = require(__base + "/config/mysql");
  * @param article_id 博文id
  */
 module.exports = async (ctx, next) => {
-  // const body = ctx.request.body;
   let { article_id } = ctx.query;
   if (article_id) {
-    let sql = `SELECT * FROM blog_article WHERE article_id=?`;
+    let article_sql = `SELECT * FROM blog_article WHERE article_id=?`;
+    let link_sql = `SELECT * FROM label_link_article WHERE article_id=?`;
     let param = [article_id];
-    let res = await query(sql, param);
-    let status = res.length ? "success" : "fail";
-    let message = res.length ? "查询成功" : "查询失败";
-    ctx.body = { status, message, data: res[0] };
+    let article = await query(article_sql, param);
+    let link = await query(link_sql, param);
+    let status = article.length ? "success" : "fail";
+    let message = article.length ? "查询成功" : "查询失败";
+    article=article[0]
+    article.labels=link
+    article.labels.map(item=>{
+      delete item.article_id
+    })
+    ctx.body = { status, message, data: article };
   } else {
-    let sql =`SELECT * FROM blog_article`
-    let res =  await query(sql);
-    ctx.body = {status:'success',message:'查询成功', data:res}
+    let article_sql = `SELECT * FROM blog_article`;
+    let link_sql = `SELECT * FROM label_link_article`;
+    let article_list = await query(article_sql);
+    let link_list = await query(link_sql);
+    article_list.map(article => {
+      article.labels=link_list.filter(item => {
+        return item.article_id === article.article_id;
+      })
+      article.labels.map(item=>{
+        delete item.article_id
+      })
+    });
+    console.log(link_list);
+    ctx.body = {
+      status: "success",
+      message: "查询成功",
+      data: article_list
+    };
   }
 };
