@@ -1,5 +1,5 @@
-const check_captcha =require('./check_captcha')
-const generate_captcha =require('./generate_captcha')
+const check_captcha =require('./modules/check_captcha')
+const generate_captcha =require('./modules/generate_captcha')
 
 
 module.exports={

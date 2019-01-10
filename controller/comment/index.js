@@ -1,7 +1,7 @@
-const addComment = require("./addComment");
-const deleteComment = require("./deleteComment");
-const editComment = require("./editComment");
-const getComment = require("./getComment");
+const addComment = require("./modules/addComment");
+const deleteComment = require("./modules/deleteComment");
+const editComment = require("./modules/editComment");
+const getComment = require("./modules/getComment");
 module.exports = {
   addComment,
   deleteComment,

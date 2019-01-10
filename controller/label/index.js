@@ -1,9 +1,9 @@
-const addLabel = require('./addLabel')
-const getLabel = require('./getLabel')
-const setLabel = require('./setLabel')
-const editLabel = require('./editLabel')
-const deleteLabel= require('./deleteLabel')
-const cancelLabel= require('./cancelLabel')
+const addLabel = require('./modules/addLabel')
+const getLabel = require('./modules/getLabel')
+const setLabel = require('./modules/setLabel')
+const editLabel = require('./modules/editLabel')
+const deleteLabel= require('./modules/deleteLabel')
+const cancelLabel= require('./modules/cancelLabel')
 
 module.exports={
   addLabel,

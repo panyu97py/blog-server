@@ -1,4 +1,4 @@
-const test = require('./test');
+const test = require('./modules/test');
 module.exports={
   test
 }

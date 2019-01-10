@@ -1,8 +1,8 @@
-const addSort = require("./addSort");
-const getSort = require("./getSort");
-const setSort = require("./setSort");
-const editSort = require("./editSort");
-const deleteSort = require("./deleteSort");
+const addSort = require("./modules/addSort");
+const getSort = require("./modules/getSort");
+const setSort = require("./modules/setSort");
+const editSort = require("./modules/editSort");
+const deleteSort = require("./modules/deleteSort");
 module.exports = {
   addSort,
   getSort,

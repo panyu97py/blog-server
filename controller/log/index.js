@@ -1,5 +1,5 @@
-const normalLog = require("./normalLog");
-const errorLog = require("./errorLog");
+const normalLog = require("./modules/normalLog");
+const errorLog = require("./modules/errorLog");
 
 module.exports = {
   normalLog,
