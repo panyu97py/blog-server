@@ -15,9 +15,9 @@ script:
 - chmod 600 deploy_rsa
 - eval "$(ssh-agent -s)"
 - ssh-add deploy_rsa
-- rm -rf root@47.99.68.224:/home/server/*
-# - scp -r ./* root@47.99.68.224:/home/server
-# - ssh root@47.99.68.224 'cd /home/server && pm2 stop all && rm -rf ./* && npm install && npm run prd'
+- ssh root@47.99.68.224 'pm2 stop all && rm -rf /home/server/*'
+- scp -r ./* root@47.99.68.224:/home/server
+- ssh root@47.99.68.224 'cd /home/server && npm install && npm run prd'
 # - cd /home/server
 # - npm install
 # - npm run prd
