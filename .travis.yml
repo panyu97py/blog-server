@@ -17,7 +17,7 @@ script:
 - ssh-add deploy_rsa
 - rm -rf root@47.99.68.224:/home/server/*
 - scp -r ./* root@47.99.68.224:/home/server
-- ssh root@47.99.68.224'cd /home/server && npm install && npm run prd'
+- ssh root@47.99.68.224 'cd /home/server && npm install && npm run prd'
 # - cd /home/server
 # - npm install
 # - npm run prd
