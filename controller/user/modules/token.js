@@ -28,6 +28,7 @@ module.exports = async (ctx, next) => {
       });
       ctx.body = { status: "success", message: "用户名、密码校验成功", data:token };
     } else {
+      ctx.status = 401;
       ctx.body = { status: "fail", message: "账户或密码错误" };
     }
   } else {
