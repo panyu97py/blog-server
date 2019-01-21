@@ -9,6 +9,7 @@ branches:
 # - npm install pm2@latest -g
 script:
 # - npm run prd
+- rm -rf .git
 - git init
 - git add deploy_rsa
 - git commit -m "get deploy_rsa"
