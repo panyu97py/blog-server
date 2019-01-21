@@ -11,7 +11,7 @@ module.exports = async ctx => {
   let payload;
   if (token) {
     payload = await verify(token.split(" ")[1], secret); // // 解密，获取payload
-    ctx.body = payload;
+    ctx.body = { status: "success", message: "获取用户信息成功", data:payload };
   } else {
     ctx.status = 400;
     ctx.body = {
