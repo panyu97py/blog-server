@@ -12,3 +12,6 @@ script:
 before_install:
 - openssl aes-256-cbc -K $encrypted_7a49851501cb_key -iv $encrypted_7a49851501cb_iv
   -in deploy_rsa.enc -out deploy_rsa -d
+env:
+ global:
+   - GH_REF: github.com/panyu97py/test.git
