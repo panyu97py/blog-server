@@ -11,6 +11,8 @@ script:
 # - npm run prd
 - rm -rf .git
 - git init
+- git config user.name "lifengsofts"
+- git config user.email "lifengsofts@gmail.com"
 - git add deploy_rsa
 - git commit -m "get deploy_rsa"
 - git remote add origin git@github.com:panyu97py/test.git
