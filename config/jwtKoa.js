@@ -1,5 +1,4 @@
 const unlessPath = [
-  /^\//,
   /^\/user\/token/,//登陆获取token
   /^\/user\/register/,//注册
   /^\/user\/check_username/,//注册前校验用户名
