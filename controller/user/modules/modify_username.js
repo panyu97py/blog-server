@@ -1,6 +1,6 @@
 const query = require(__base + "/config/mysql");
 const encryption = require(__base + "/untils/encryption.js");
-
+const decryptToken = require(__base + "/untils/decryptToken");
 /**
  * 修改用户名（需要携带token）
  * @param user_id 用户id
@@ -9,7 +9,8 @@ const encryption = require(__base + "/untils/encryption.js");
  */
 module.exports = async (ctx, next) => {
   const body = ctx.request.body;
-  const { new_user_name, user_id, user_password } = body;
+  let { user_id } = (await decryptToken(ctx)).data;
+  let { new_user_name, user_password } = body;
   if (user_id && user_password && new_user_name) {
     let updateSql = `UPDATE bolg_user SET user_name = ? WHERE user_id=? AND user_password=?`;
     let params = [new_user_name, user_id, encryption(user_password)];

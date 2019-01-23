@@ -1,4 +1,5 @@
 const query = require(__base + "/config/mysql");
+const decryptToken = require(__base + "/untils/decryptToken");
 /**
  * 创建博客博文（需要携带token）
  * @param article_title 博文标题
@@ -7,14 +8,15 @@ const query = require(__base + "/config/mysql");
  */
 module.exports = async (ctx, next) => {
   const body = ctx.request.body;
-  let { article_title, user_id, article_content } = body;
+  let { article_title, article_content } = body;
+  let { user_id } = (await decryptToken(ctx)).data;
   if (article_title && user_id && article_content) {
     let sql = `INSERT INTO blog_article (article_id,article_title, article_content,user_id) VALUES (REPLACE(UUID(),"-",""),?,?,?)`; //sql语句
-    let params = [article_title,article_content,user_id]
-    let res =await query(sql, params)
-    let status = res.affectedRows?'success':'fail'
-    let message =res.affectedRows?'新增博文成功':'新增博文失败'
-    ctx.body ={status,message}
+    let params = [article_title, article_content, user_id];
+    let res = await query(sql, params);
+    let status = res.affectedRows ? "success" : "fail";
+    let message = res.affectedRows ? "新增博文成功" : "新增博文失败";
+    ctx.body = { status, message };
   } else {
     ctx.status = 400;
     let status = "error";

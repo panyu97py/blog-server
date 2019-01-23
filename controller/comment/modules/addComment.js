@@ -1,4 +1,5 @@
 const query = require(__base + "/config/mysql");
+const decryptToken = require(__base + "/untils/decryptToken");
 /**
  * 新增评论(需要携带token)
  * @param user_id 用户id
@@ -8,7 +9,8 @@ const query = require(__base + "/config/mysql");
  */
 module.exports = async (ctx, next) => {
   const body = ctx.request.body;
-  let { user_id, article_id, commit_content, parent_comment_id } = body;
+  let { user_id } = (await decryptToken(ctx)).data;
+  let { article_id, commit_content, parent_comment_id } = body;
   if (user_id && article_id && commit_content && parent_comment_id) {
     let sql = `INSERT INTO blog_comment (comment_id,user_id, article_id,commit_content,parent_comment_id) VALUES (REPLACE(UUID(),"-",""),?,?,?,?)`; //sql语句
     let params = [user_id, article_id, commit_content, parent_comment_id];
