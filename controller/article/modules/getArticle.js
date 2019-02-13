@@ -5,13 +5,18 @@ const cloneDeep = require("lodash/cloneDeep");
  * @param {*} article_list 博文列表数据
  * @param {*} link_list 标签列表数据
  */
-const merge = (article_list, link_list) => {
+const merge = (article_list, link_list,user_list) => {
   article_list = cloneDeep(article_list);
   link_list = cloneDeep(link_list);
+  user_list = cloneDeep(user_list);
   article_list.map(article => {
     article.article_labels = link_list.filter(item => {
       return item.article_id === article.article_id;
     });
+    article.article_author_info = user_list.find(item=>{
+      return item.user_id===article.user_id
+    })
+    delete article.user_id
     article.article_labels.map(item => {
       delete item.article_id;
     });
@@ -24,6 +29,8 @@ const merge = (article_list, link_list) => {
  */
 module.exports = async (ctx, next) => {
   let { article_id, label_id } = ctx.query;
+    let user_sql =`SELECT user_id,user_name,user_nickname FROM bolg_user`
+    let user_list =  await query(user_sql);
   if (article_id && label_id) {
     ctx.status=400
     ctx.body = {
@@ -38,7 +45,7 @@ module.exports = async (ctx, next) => {
     let link = await query(link_sql, param);
     let status = article.length ? "success" : "fail";
     let message = article.length ? "查询成功" : "查询失败";
-    ctx.body = { status, message, data: merge(article, link)[0] };
+    ctx.body = { status, message, data: merge(article, link,user_list)[0] };
   } else if (label_id) {
     let article_sql = `SELECT * FROM blog_article`;
     let link_sql = `SELECT * FROM label_link_article`;
@@ -58,7 +65,7 @@ module.exports = async (ctx, next) => {
     ctx.body = {
       status: "success",
       message: "查询成功",
-      data: merge(article_filter_list, link_list)
+      data: merge(article_filter_list, link_list,user_list)
     };
   } else {
     let article_sql = `SELECT * FROM blog_article`;
@@ -68,7 +75,7 @@ module.exports = async (ctx, next) => {
     ctx.body = {
       status: "success",
       message: "查询成功",
-      data: merge(article_list, link_list)
+      data: merge(article_list, link_list,user_list)
     };
   }
 };
