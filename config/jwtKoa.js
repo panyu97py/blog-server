@@ -15,7 +15,7 @@ const unlessPath = [
  */
 module.exports = {
   secret: "my_blog_app",
-  tokenValidityPeriod: 20 * 60, //token 有效时间
+  tokenValidityPeriod: 7 * 24 * 60 * 60, //token 有效时间 7天
   unless: {
     path: unlessPath
   }
