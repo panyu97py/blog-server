@@ -9,7 +9,8 @@ const merge = (article_list, link_list,user_list) => {
   article_list = cloneDeep(article_list);
   link_list = cloneDeep(link_list);
   user_list = cloneDeep(user_list);
-  article_list.map(article => {
+  article_list.map((article,index) => {
+    article.article_serial_number=index+1
     article.article_labels = link_list.filter(item => {
       return item.article_id === article.article_id;
     });
